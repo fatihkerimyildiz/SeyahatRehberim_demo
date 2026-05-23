@@ -1,0 +1,84 @@
+﻿@model SeyahatRehberim_demo.Models.Classes.BlogComment
+
+@{
+    ViewData["Title"] = "BlogDetails";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<!-- Sadece gerekli CSS dosyalarını ekliyoruz, Layout'ta yoksa kalsın -->
+<link href="~/web2/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="~/web2/css/style.css" rel='stylesheet' type='text/css' />
+
+<div class="single">
+    <div class="container">
+        <!-- İçeriği ortalayan sihirli dokunuş -->
+        <div class="col-md-8 single-main">
+            <div class="single-grid">
+                @foreach (var item in Model.Value1)
+                {
+                    <div class="blog-post" style="margin-bottom: 50px;">
+                        <h2 style="font-weight:700; margin-bottom:20px;">@item.Title</h2>
+                        <img src="@Url.Content(item.BlogImage)" class="img-responsive" style="width:100%; border-radius:8px; margin-bottom: 25px" alt="@item.Title" />
+                        <p style="font-size:1.1em; line-height:1.8; color:#555; text-align:justify;">
+                            @item.Description
+                        </p>
+                    </div>
+                }
+            </div>
+
+            <div class="comments-section" style="margin-top: 50px; background: #f9f9f9; padding: 20px; border-radius: 8px;">
+                <h3 style="margin-bottom:20px;">Yorumlar</h3>
+                @foreach (var item in Model.Value2)
+                {
+                    <ul class="comment-list" style="list-style:none; padding:0;">
+                        <li style="display:flex; align-items:flex-start; margin-bottom:20px;">
+                            <img src="~/web2/images/avatar.png" class="img-responsive" style="width:60px; border-radius:50%; margin-right:15px;" alt="">
+                            <div class="desc">
+                                <h5 style="font-weight:bold; margin:0;">@item.UserName</h5>
+                                <p style="font-style:italic; color:#777;">@item.CommentText</p>
+                            </div>
+                        </li>
+                    </ul>
+                }
+            </div>
+
+            <div class="content-form" style="margin-top: 40px;">
+                <h3 style="margin-bottom:20px;">Bir yorum bırakın...</h3>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Kullanıcı Adı" required style="margin-bottom:10px;" />
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Mail Adresi" required style="margin-bottom:10px;" />
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Yorumunuzu buraya yazın..." rows="5" style="margin-bottom:15px;"></textarea>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Yorumu Gönder" style="padding:10px 30px; background-color:#333; border:none;" />
+                </form>
+            </div>
+        </div>
+
+        <!-- Sağ Sidebar -->
+        <div class="col-md-4 side-content">
+            <div class="recent" style="margin-bottom:40px;">
+                <br />
+                <h3 style="border-bottom:2px solid #333; padding-bottom:10px;">SON POSTLAR</h3>
+                <ul style="list-style:none; padding:10px 0;">
+                    <li style="margin-bottom:10px;"><a href="#" style="color:#444; text-decoration:none;">→ Aliquam tincidunt mauris</a></li>
+                    <li style="margin-bottom:10px;"><a href="#" style="color:#444; text-decoration:none;">→ Vestibulum auctor dapibus</a></li>
+                    <li style="margin-bottom:10px;"><a href="#" style="color:#444; text-decoration:none;">→ Nunc dignissim risus</a></li>
+                </ul>
+            </div>
+
+            <div class="comments">
+                <h3 style="border-bottom:2px solid #333; padding-bottom:10px;">SON YORUMLAR</h3>
+                <ul style="list-style:none; padding:10px 0;">
+                    <li style="margin-bottom:10px; font-size:0.9em;"><b>Amada Doe:</b> Hello World!</li>
+                    <li style="margin-bottom:10px; font-size:0.9em;"><b>Steve Roberts:</b> Harika manzara!</li>
+                </ul>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

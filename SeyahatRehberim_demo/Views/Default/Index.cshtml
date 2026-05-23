@@ -1,0 +1,181 @@
+﻿@using SeyahatRehberim_demo.Models.Classes
+@model SeyahatRehberim_demo.Models.Classes.HomePageViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<!DOCTYPE HTML>
+<html>
+<body>
+<div class="header-banner">
+<div class="wrap">
+	<div class="banner">
+		<div class="indent">
+                <h2 class="indent-left margin-bot">Seyahatini Kolayca Planla</h2>		
+				<div class="banner-left">
+				   	<div class="con-text">
+							<div class="grid1-img">
+								<img src="~/web/images/glass.png" alt="">
+							</div>
+							<div class="grid1-desc">
+								<p>Restoranlar</p>
+							</div>
+							<div class="clear"></div>
+					</div>
+					<div class="con-text">
+							<div class="grid1-img">
+								<img src="~/web/images/flight.png" alt="">
+							</div>
+							<div class="grid1-desc">
+								<p>Uçuşlar</p>
+							</div>
+							<div class="clear"></div>
+					</div>
+	<div class="con-text">
+			<div class="grid1-img">
+				<img src="~/web/images/group.png" alt="">
+			</div>
+			<div class="grid1-desc">
+				<p>Aktiviteler</p>
+			</div>
+			<div class="clear"></div>
+	</div>
+	<div class="con-text">
+			<div class="grid1-img">
+				<img src="~/web/images/key.png" alt="">
+			</div>
+			<div class="grid1-desc">
+				<p>Konaklama</p>
+			</div>
+			<div class="clear"></div>
+	</div>
+   <div class="clear"></div>
+</div>
+<div class="header_bottom_right_images">
+
+ <div class="slider">
+	    <ul class="rslides" id="slider1" style="width:650px;height:370px;">
+            @foreach(var item in Model.Blogs)
+            {
+                <li><img src="@Url.Content(item.BlogImage)" alt=""></li>
+            }
+
+	    </ul>
+    </div>
+	       </div>                                        
+	</div>
+    <div class="clear"></div>
+      </div>
+      	<div class="clear"></div>
+      </div>
+      </div>
+     <div class"content">
+      	<div class="wrap">
+      		<div class="wrapper">
+      	<div class="con-top">
+      		<h3>Seyahat Rehberim'e Hoş Geldiniz!</h3>
+                    <p style="font-size: 16px; line-height: 1.6;">
+                        Türkiye'nin dört bir yanını keşfetmek ve hayalinizdeki tatili planlamak artık çok kolay!
+                         Seyahat Rehberim, bütçenize ve tarzınıza en uygun rotaları, konaklama seçeneklerini ve kaçırılmaması gereken aktiviteleri tek bir yerde topluyor. Karmaşık planlama süreçleriyle uğraşmadan, 
+                         Ege'nin mavi koylarından Kapadokya'nın masalsı vadilerine kadar her seyahatinizi adım adım kolayca tasarlayabilirsiniz. Türkiye'yi keşfetmeye hazır mısınız? Sizin rehberiniz, sizin rotanız!
+                    </p>
+                </div>
+                <div class="con-bot">
+                    @{
+                        int counter = 0;
+                    }
+                    @foreach (var item in Model.Destinations.Take(3))
+                    {
+                        counter++;
+
+                        string cardClass = "left";
+                        if (counter == 2) { cardClass = "left mgl"; } 
+                        else if (counter == 3) { cardClass = "right"; } 
+
+                        <div class="@cardClass">
+                            <div class="bot-left">
+                                <img src="@Url.Content(item.DestImage)" style="width:300px;height:160px;" alt="" />
+                            </div>
+                            <div class="left-text">
+                                <h4>@item.DestName</h4>
+                                <span class="doller">₺@item.DestCost</span> <p>@item.DestDescription</p>
+                                <p><a href="@item.DestUrl"><span class="read">Read More >></span></a></p>
+                            </div>
+                        </div>
+                        if (counter % 3 == 0)
+                        {
+                            <div style="clear:both;"></div>
+                        }
+                    }
+                    <div style="clear:both;"></div>
+                </div>
+      		<div class="clear"></div>
+      	</div>
+      		<div class="grids">
+      	<div class="box1">
+                                <div class="padding">
+                                    <h4>En Çok Talep Gören</h4>
+                                    <ul class="list list-pad">
+                                @{
+                                    int i = 1;
+                                }
+                                @foreach (var item in (Model.Destinations).Take(10))
+                                {
+                                    <li class="list-bg">
+                                        <span>@i.</span>
+                                        <a href="@item.DestUrl">@item.DestName</a>
+                                    </li>
+
+                                    i++; 
+                                }
+                                    </ul>
+                                    
+                                </div>
+                    <div class="padding1">
+                        <h4>En İyi Yerler</h4>
+
+                        <div class="box-left">
+                            @foreach (var item in Model.Destinations.OrderByDescending(x => x.ID).Take(3))
+                            {
+                                <div class="bot-img">
+                                    <img src="@Url.Content(item.DestImage)" style="width:120px; height:65px;" alt="" />
+                                </div>
+                                <div class="bot-desc">
+                                    <p>
+                                        @(item.DestDescription.Length > 80
+                                                                            ? item.DestDescription.Substring(0, 80) + "..."
+                                                                            : item.DestDescription)
+                                    </p>
+                            </div>
+                                <div style="clear:both; height:10px;"></div>
+                            }
+                        </div>
+
+                        <div class="box1-left">
+                            @foreach (var item in Model.Destinations.Take(3))
+                            {
+                                <div class="bot-img">
+                                    <img src="@Url.Content(item.DestImage)" style="width:120px; height:65px;" alt="" />
+                                </div>
+                                <div class="bot-desc">
+                                    <p>
+                                        @(item.DestDescription.Length > 80
+                                                                            ? item.DestDescription.Substring(0, 80) + "..."
+                                                                            : item.DestDescription)
+                                    </p>
+                            </div>
+                                <div style="clear:both; height:10px;"></div>
+                            }
+                        </div>
+
+                        <div class="clear"></div>
+                    </div>
+                        <div class="clear"></div>      
+      	        </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</body>
+</html>

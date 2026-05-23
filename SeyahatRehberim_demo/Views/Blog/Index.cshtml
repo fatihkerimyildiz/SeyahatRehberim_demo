@@ -1,0 +1,68 @@
+﻿@model SeyahatRehberim_demo.Models.Classes.BlogComment
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<link href="~/web2/css/bootstrap.css" rel='stylesheet' type='text/css' />
+	<link href="~/web2/css/style.css" rel='stylesheet' type='text/css' />
+</head>
+
+<body>
+	<div class="header">
+		<div class="container">
+			<div class="clearfix"></div>
+		</div>
+	</div>
+
+	<div class="single">
+		<div class="container">
+			<div class="col-md-8 single-main">
+				@foreach (var item in Model.Value1)
+				{
+					<div class="single-grid">
+						<img src="@Url.Content(item.BlogImage)" style="margin-bottom:20px; width:100%;" />
+						<a href="/Blog/BlogDetails/@item.ID">@item.Title</a>
+						<p>
+							@item.Description
+						</p>
+					</div>
+					<br /> 
+				}
+			</div>
+
+			<div class="col-md-4 side-content">
+				<div class="recent">
+					<br />
+					<h3>Son Bloglar</h3>
+					<ul>
+						@foreach (var item in Model.Value3) // Son 5 blogu göster
+						{
+							<li><a href="/Blog/BlogDetails/@item.ID"> @item.Title</a></li>
+						}
+					</ul>
+                    <br />
+					<br />
+					<h3>Son Yorumlar</h3>
+					<ul>
+						<li><a href="#">Aliquam tincidunt mauris</a></li>
+						<li><a href="#">Vestibulum auctor dapibus lipsum</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="clearfix"></div>
+		</div>
+	</div>
+
+	<div class="footer">
+		<div class="container">
+			<p>Copyrights © 2015 Blog</p>
+		</div>
+	</div>
+</body>
+</html>

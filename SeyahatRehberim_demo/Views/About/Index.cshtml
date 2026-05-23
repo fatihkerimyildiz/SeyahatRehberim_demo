@@ -1,0 +1,22 @@
+﻿@using SeyahatRehberim_demo.Models.Classes
+@model List<About>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<div class="content">
+	<div class="wrap">
+		<div class="about">
+			<h3>Hakkımızda</h3>
+			<img src="~/web/images/about3.webp" alt="" />
+			@foreach (var item in Model)
+			{
+				<p style="font-size: 16px;">@item.Description</p>
+            }
+		</div>
+	</div>
+</div>
+
+

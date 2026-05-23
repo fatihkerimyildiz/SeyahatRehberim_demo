@@ -67,85 +67,82 @@ body{
 	vertical-align: top;
 	padding: 10px;
 }
-#nav,#nav ul {
-    list-style: none outside none;
-    margin: 0;
-    padding: 0;
+#nav, #nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
+
 #nav {
-  	border-radius: 5px 5px 5px 5px;
-   	z-index: 9999;
-    display: table;
-    padding: 10px;
-    position: relative;
-    font-family:"Century Gothic",  Helvetica, sans-serif;
+	border-radius: 5px;
+	z-index: 9999;
+	padding: 10px;
+	position: relative;
+	font-family: "Century Gothic", Helvetica, sans-serif;
 }
-#nav ul {
-	background: url(../images/head_bot.gif);
-  	border:1px solid #291c1b;
-    border-radius: 0 5px 5px 5px;
-    border-width: 0 1px 1px;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
-    left: -9999px;
-    overflow: hidden;
-    padding: 20px 0 10px;
-    position: absolute;
-    top: -9999px;
 
-    -moz-transform: scaleY(0);
-    -ms-transform: scaleY(0);
-    -o-transform: scaleY(0);
-    -webkit-transform: scaleY(0);
-    transform: scaleY(0);
+	/* Menü yatay hizalama */
+	#nav > li {
+		float: left;
+		position: relative;
+	}
 
-    -moz-transform-origin: 0 0;
-    -ms-transform-origin: 0 0;
-    -o-transform-origin: 0 0;
-    -webkit-transform-origin: 0 0;
-    transform-origin: 0 0;
+	/* Ana linkler */
+	#nav li a {
+		color: #fff;
+		display: block;
+		font-size: 16px;
+		padding: 10px 20px; /* 54px çok fazlaydý */
+		text-decoration: none;
+	}
 
-    -moz-transition: -moz-transform 0.1s linear;
-    -ms-transition: -ms-transform 0.1s linear;
-    -o-transition: -o-transform 0.1s linear;
-    -webkit-transition: -webkit-transform 0.1s linear;
-    transition: transform 0.1s linear;
-}
-#nav li {
-    float: left;
-    position: relative;
-}
-#nav li a {
-    color: #FFFFFF;
-    display: block;
-    font-size: 16px;
-    padding: 7px 54px;
-    text-decoration: none;
-}
-#nav li:hover > a {
-    background: #291c1b;
-    border-radius: 5px 5px 5px 5px;
-    color: #FFFFFF;
-}
-#nav li:hover > a.hsubs {
-    border-radius: 5px 5px 0 0;
-}
-#nav li:hover ul.subs {
-    left: 0;
-    top: 36px;
-    width: 250px;
-    -moz-transform: scaleY(1);
-    -ms-transform: scaleY(1);
-    -o-transform: scaleY(1);
-    -webkit-transform: scaleY(1);
-}
-#nav ul li {
-    width: 100%;
-}
-#nav ul li:hover > a {
-     background: #291c1b !important;
-    border-radius: 5px 5px 5px 5px;
-   
-}
+	/* Hover */
+	#nav li:hover > a {
+		background: #291c1b;
+		border-radius: 5px;
+	}
+
+	/* Dropdown */
+	#nav ul {
+		background: #2c1e1d;
+		border: 1px solid #291c1b;
+		border-radius: 0 5px 5px 5px;
+		box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+		position: absolute;
+		top: 100%;
+		left: 0;
+		min-width: 200px;
+		display: none; /* gizli */
+	}
+
+	/* Hover olunca aç */
+	#nav li:hover > ul {
+		display: block;
+	}
+
+	/* Dropdown item */
+	#nav ul li {
+		width: 100%;
+		float: none;
+	}
+
+		/* Dropdown link */
+		#nav ul li a {
+			padding: 10px;
+		}
+
+			/* Hover dropdown */
+			#nav ul li a:hover {
+				background: #291c1b;
+				border-radius: 5px;
+			}
+
+	/* Float fix */
+	#nav::after {
+		content: "";
+		display: block;
+		clear: both;
+	}
 /*--content--*/
 .header-banner{
 	background: #f0f0f0;

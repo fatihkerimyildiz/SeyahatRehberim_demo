@@ -1,7 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using SeyahatRehberim_demo.Models.Classes;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<Context>();
 
 var app = builder.Build();
 
