@@ -1,68 +1,95 @@
 ﻿@model SeyahatRehberim_demo.Models.Classes.BlogComment
 
 @{
-	ViewData["Title"] = "Index";
-	Layout = "~/Views/Shared/_UILayout.cshtml";
+    ViewData["Title"] = "Bloglar";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
 }
 
-<!DOCTYPE HTML>
-<html>
-<head>
-	<link href="~/web2/css/bootstrap.css" rel='stylesheet' type='text/css' />
-	<link href="~/web2/css/style.css" rel='stylesheet' type='text/css' />
-</head>
+<link href="~/web2/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="~/web2/css/style.css" rel="stylesheet" type="text/css" />
 
-<body>
-	<div class="header">
-		<div class="container">
-			<div class="clearfix"></div>
-		</div>
-	</div>
+<div class="single" style="padding: 50px 0; background-color: #fcfcfc;">
+    <div class="container">
 
-	<div class="single">
-		<div class="container">
-			<div class="col-md-8 single-main">
-				@foreach (var item in Model.Value1)
-				{
-					<div class="single-grid">
-						<img src="@Url.Content(item.BlogImage)" style="margin-bottom:20px; width:100%;" />
-						<a href="/Blog/BlogDetails/@item.ID">@item.Title</a>
-						<p>
-							@item.Description
-						</p>
-					</div>
-					<br /> 
-				}
-			</div>
+        <div class="col-md-8 single-main">
+            @foreach (var item in Model.Value1)
+            {
+                <div class="single-grid" style="background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); margin-bottom: 35px; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 25px rgba(0,0,0,0.08)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.04)'">
 
-			<div class="col-md-4 side-content">
-				<div class="recent">
-					<br />
-					<h3>Son Bloglar</h3>
-					<ul>
-						@foreach (var item in Model.Value3) // Son 5 blogu göster
-						{
-							<li><a href="/Blog/BlogDetails/@item.ID"> @item.Title</a></li>
-						}
-					</ul>
-                    <br />
-					<br />
-					<h3>Son Yorumlar</h3>
-					<ul>
-						<li><a href="#">Aliquam tincidunt mauris</a></li>
-						<li><a href="#">Vestibulum auctor dapibus lipsum</a></li>
-					</ul>
-				</div>
-			</div>
+                    <img src="@Url.Content(item.BlogImage)" style="margin-bottom:20px; width:100%; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); max-height: 350px; object-fit: cover;" alt="@item.Title" />
 
-			<div class="clearfix"></div>
-		</div>
-	</div>
+                    <h2 style="font-weight: 800; margin-top: 10px; margin-bottom: 12px;">
+                        <a href="/Blog/BlogDetails/@item.ID" style="color: #b33951; text-decoration: none;">@item.Title</a>
+                    </h2>
 
-	<div class="footer">
-		<div class="container">
-			<p>Copyrights © 2015 Blog</p>
-		</div>
-	</div>
-</body>
-</html>
+                    <div class="blog-meta" style="color: #7f8c8d; font-size: 13px; margin-bottom: 15px;">
+                        <span style="margin-right: 15px;"><i class="glyphicon glyphicon-user" style="color: #b33951;"></i> <b>Yazar:</b> @item.Writer</span>
+                        <span><i class="glyphicon glyphicon-calendar" style="color: #b33951;"></i> @item.Date.ToString("dd MMMM yyyy")</span>
+                    </div>
+
+                    <p style="font-size: 15px; line-height: 1.7; color: #555; text-align: justify;">
+                        @if (item.Description != null && item.Description.Length > 180)
+                        {
+                            @item.Description.Substring(0, 180)
+                    
+                            <text>...</text>
+                        }
+                        else
+                        {
+                            @item.Description
+                        }
+                    </p>
+
+                    <div style="margin-top: 20px;">
+                        <a href="/Blog/BlogDetails/@item.ID" class="btn" style="background-color: #b33951; color: white; padding: 8px 25px; border-radius: 6px; font-weight: 600; font-size: 14px;">Devamını Oku >></a>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="col-md-4 side-content">
+
+            <div class="recent" style="background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); margin-bottom:30px;">
+                <h3 style="font-weight: 700; color: #2c3e50; border-bottom:2px solid #b33951; padding-bottom:12px; margin-top: 0; margin-bottom: 15px;">SON YAZILAR</h3>
+                <ul style="list-style:none; padding:0; margin:0;">
+                    @foreach (var item in Model.Value3.OrderByDescending(x => x.ID).Take(3))
+                    {
+                        <li style="padding: 12px 0; border-bottom: 1px solid #f1f1f1;">
+                            <a href="/Blog/BlogDetails/@item.ID" style="color:#4a5568; text-decoration:none; font-weight:600; display:block;">
+                                📝 @item.Title
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <div class="comments" style="background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+                <h3 style="font-weight: 700; color: #2c3e50; border-bottom:2px solid #b33951; padding-bottom:12px; margin-top:0; margin-bottom: 15px;">SON YORUMLAR</h3>
+                <ul style="list-style:none; padding:0; margin:0;">
+                    @foreach (var item in Model.Value2.OrderByDescending(x => x.ID).Take(3))
+                    {
+                        <li style="padding: 12px 0; border-bottom: 1px solid #f1f1f1; font-size:14px; color:#4a5568; line-height: 1.5;">
+                            <i class="glyphicon glyphicon-comment" style="color: #b33951; margin-right:5px; font-size: 12px;"></i>
+                            <b style="color: #2c3e50;">@item.UserName:</b>
+                            <span>
+                                @if (item.CommentText != null && item.CommentText.Length > 45)
+                                {
+                                    @item.CommentText.Substring(0, 45)
+                            
+                                    <text>...</text>
+                                }
+                                else
+                                {
+                                    @item.CommentText
+                                }
+                            </span>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
+</div>

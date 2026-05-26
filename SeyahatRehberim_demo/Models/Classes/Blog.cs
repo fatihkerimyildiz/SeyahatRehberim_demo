@@ -10,6 +10,7 @@ namespace SeyahatRehberim_demo.Models.Classes
         public DateTime Date { get; set; }
         public string Description { get; set; }
         public string BlogImage { get; set; }
+        public string Writer { get; set; }
 
         //(bir blogda birden çok yorum olabilir) bu bire çok ilişkiyi sağlamak için:
         public ICollection<Comment> Comments { get; set; }  // Blog ile Comment arasında bire çok ilişki kurmak için ICollection kullanıyoruz.
