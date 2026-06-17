@@ -1,0 +1,79 @@
+﻿@using SeyahatRehberim_demo.Models.Classes
+@model List<Destination>
+
+@{
+    ViewData["Title"] = "Rotalarımız";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<link href="~/web2/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="~/web2/css/style.css" rel="stylesheet" type="text/css" />
+
+<div class="single" style="padding: 50px 0; background-color: #fcfcfc;">
+    <div class="container">
+
+        <div class="col-md-8 single-main">
+            @foreach (var item in Model)
+            {
+                <div class="single-grid" style="background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); margin-bottom: 35px; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 25px rgba(0,0,0,0.08)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.04)'">
+
+                    <img src="@Url.Content(item.DestImage)" style="margin-bottom:20px; width:100%; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); max-height: 350px; object-fit: cover;" alt="@item.DestName" />
+
+                    <h2 style="font-weight: 800; margin-top: 10px; margin-bottom: 12px;">
+                        <a href="/Destination/DestinationDetails/@item.ID" style="color: #b33951; text-decoration: none;">@item.DestName</a>
+                    </h2>
+
+                    <div class="blog-meta" style="color: #7f8c8d; font-size: 14px; margin-bottom: 15px;">
+                        <span style="margin-right: 15px;">
+                            <i class="glyphicon glyphicon-tag" style="color: #b33951;"></i>
+                            <b>Başlangıç Fiyatı:</b>
+                            <span style="color: #27ae60; font-weight: 700;">@item.DestCost.ToString("C0")</span>
+                        </span>
+                        <span>
+                            <i class="glyphicon glyphicon-map-marker" style="color: #b33951;"></i> Türkiye
+                        </span>
+                    </div>
+
+                    <p style="font-size: 15px; line-height: 1.7; color: #555; text-align: justify;">
+                        @if (item.DestDescription != null && item.DestDescription.Length > 180)
+                        {
+                            @item.DestDescription.Substring(0, 180)
+                    
+                            <text>...</text>
+                        }
+                        else
+                        {
+                            @item.DestDescription
+                        }
+                    </p>
+
+                    <div style="margin-top: 20px;">
+                        <a href="/Destination/DestinationDetails/@item.ID" class="btn" style="background-color: #b33951; color: white; padding: 8px 25px; border-radius: 6px; font-weight: 600; font-size: 14px;">Detayları Gör >></a>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="col-md-4 side-content">
+
+            <div class="recent" style="background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); margin-bottom:30px;">
+                <h3 style="font-weight: 700; color: #2c3e50; border-bottom:2px solid #b33951; padding-bottom:12px; margin-top: 0; margin-bottom: 15px;">NEDEN BİZİMLE?</h3>
+                <p style="font-size: 14px; color: #666; line-height: 1.6; text-align: justify;">
+                    Seyahat Rehberim ile Türkiye'nin ve dünyanın en büyüleyici destinasyonlarını uzman rehberler eşliğinde keşfedin. Güvenli konaklama, konforlu ulaşım ve bütçenize en uygun fiyat garantisiyle hayalinizdeki tatili bugünden planlayın.
+                </p>
+            </div>
+
+            <div class="comments" style="background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+                <h3 style="font-weight: 700; color: #2c3e50; border-bottom:2px solid #b33951; padding-bottom:12px; margin-top:0; margin-bottom: 15px;">ÖNE ÇIKAN OLANAKLAR</h3>
+                <ul style="list-style:none; padding:0; margin:0; color: #555; font-weight: 600; font-size: 14px;">
+                    <li style="padding: 10px 0; border-bottom: 1px solid #f1f1f1;"><i class="glyphicon glyphicon-ok" style="color: #27ae60; margin-right: 8px;"></i> 7/24 Canlı Destek Altyapısı</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #f1f1f1;"><i class="glyphicon glyphicon-ok" style="color: #27ae60; margin-right: 8px;"></i> En İyi Fiyat ve İade Garantisi</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #f1f1f1;"><i class="glyphicon glyphicon-ok" style="color: #27ae60; margin-right: 8px;"></i> Yerel ve Deneyimli Rehberler</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
+</div>

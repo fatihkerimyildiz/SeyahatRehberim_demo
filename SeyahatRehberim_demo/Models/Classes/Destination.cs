@@ -12,5 +12,6 @@ namespace SeyahatRehberim_demo.Models.Classes
         public double DestCost { get; set; }
         public string DestDescription { get; set; }
         public string DestUrl { get; set; }
+        public string DestFlight { get; set; }
     }
 }
